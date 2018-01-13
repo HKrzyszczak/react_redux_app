@@ -36,7 +36,7 @@ class Container extends  Component {
 
     minusHundred = () => {
         this.props.addValue(-100);
-    }
+    };
 
     render() {
 

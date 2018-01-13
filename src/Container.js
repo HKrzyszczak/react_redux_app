@@ -1,26 +1,48 @@
 import React, { Component } from 'react';
-import { add, sub, reset } from './logic';
+import {add, sub, reset, addValue} from './logic';
+import { connect } from 'react-redux';
+import CounterAwesomeButton from "./CounterAwesomeButton";
+
+const mapStateToProps = state => {
+    return {
+        value: state.counter.counter
+    }
+
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        add: () => dispatch(add()),
+        sub: () => dispatch(sub()),
+        reset: () => dispatch(reset()),
+        addValue: (newValue) => dispatch(addValue(newValue))
+
+    }
+};
 
 class Container extends  Component {
 
-
     handleInc = () => {
-        add();
+        this.props.add();
     };
 
     handleDec = () => {
-        sub();
+        this.props.sub();
     };
 
     handleReset = () => {
-        reset();
+        this.props.reset();
     };
+
+    minusHundred = () => {
+        this.props.addValue(-100);
+    }
 
     render() {
 
         return(
             <div>
-                <h3>{this.state.counter}</h3>
+                <div>Counter: {this.props.value}</div>
                 <button
                     onClick={this.handleInc}>
                     Inc
@@ -33,10 +55,13 @@ class Container extends  Component {
                     onClick={this.handleReset}>
                     Reset
                 </button>
+                <div>
+                <CounterAwesomeButton handleSub={this.minusHundred}/>
+                </div>
             </div>
         )
     }
 }
 
 
-export default Container;
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

@@ -1,28 +1,28 @@
-const ADD = 'counter/ADD'
-const SUB =  'counter/SUB'
-const RESET = 'counter/RESET'
-const ADD_VALUE = 'counte/ADD_VALUE'
+const ADD = 'counter/ADD';
+const SUB =  'counter/SUB';
+const RESET = 'counter/RESET';
+const ADD_VALUE = 'counte/ADD_VALUE';
 
 export function add() {
-    {
+    return {
         type: ADD
     }
 }
 
 export function sub() {
-    {
+    return {
         type: SUB
     }
 }
 
 export function reset() {
-    {
+    return {
         type: RESET
     }
 }
 
 export function addValue(value) {
-    {
+    return {
         type: ADD_VALUE,
         value
     }
@@ -33,33 +33,33 @@ const INITIAL_STATE = {
     counter: 0
 };
 
-export default fuction reducer(state = INITIAL_STATE, action) {
+export default function reducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case ADD:
             return Object.assign(
                 {},
                 state,
                 { counter: state.counter + 1 }
-            )
+            );
         case SUB:
             return Object.assign(
                 {},
                 state,
                 { counter: state.counter - 1 }
-            )
+            );
         case RESET:
             return Object.assign(
                 {},
                 state,
                 { counter: 0 }
-            )
+            );
         case ADD_VALUE:
             return Object.assign(
                 {},
                 state,
-                { counter: action.value }
-            )
-        case default:
+                { counter: state.counter + action.value }
+            );
+        default:
             return state;
     }
 }

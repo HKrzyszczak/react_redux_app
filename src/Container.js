@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {add, sub, reset, addValue} from './logic';
+import {add, sub, reset, addValue, fetchFromServer} from './logic';
 import { connect } from 'react-redux';
 import CounterAwesomeButton from "./CounterAwesomeButton";
 
@@ -15,12 +15,16 @@ const mapDispatchToProps = dispatch => {
         add: () => dispatch(add()),
         sub: () => dispatch(sub()),
         reset: () => dispatch(reset()),
-        addValue: (newValue) => dispatch(addValue(newValue))
-
+        addValue: (newValue) => dispatch(addValue(newValue)),
+        fetchFromServer: () => dispatch(fetchFromServer),
     }
 };
 
 class Container extends  Component {
+
+    componentDidMount() {
+      this.props.fetchFromServer();
+    };
 
     handleInc = () => {
         this.props.add();
